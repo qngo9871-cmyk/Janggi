@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		162DD003DDF444014AA0EC75 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D96A7BD0A9FEB412F0B19 /* PurchaseManager.swift */; };
+		38155DD74C053AD622766B24 /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9D92AD37310CF625050E2 /* UpgradeView.swift */; };
+		3A28DDA79D2E80804A2279EB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C49CBC336062921900D2AE6 /* GameView.swift */; };
+		433EF0BBBF0D620B4D216DF7 /* Janggi.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 7DC252F2C97B21DC5EF5A2AC /* Janggi.storekit */; };
+		82E0414852025987E376FADC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE370F88D2F74496D3962FA7 /* Piece.swift */; };
+		83B5F5361DEBBAC0BD741861 /* AIEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364F0B19DB03171D88EFDE9 /* AIEngine.swift */; };
+		A5150C1F3FEB5417705914F0 /* JanggiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE349046022DE8AF1AAE4D9 /* JanggiApp.swift */; };
+		ADFF49262297348D2D8E22E3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A72C2F2B9C3835463F8A9A07 /* PrivacyInfo.xcprivacy */; };
+		B36EFCB438F6A649C0B91890 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BA7CA1C1850F793DCA3D51 /* Board.swift */; };
+		B3C9B9A6A21F361CC7031F84 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8115E21B06F8A360EF791B /* GameModel.swift */; };
+		B56414183DD4D7CD29287D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F753729D1D3B7DE86291DD80 /* Assets.xcassets */; };
+		FB1F7868A7B10BCA60D4580E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5197BBC879D7F3BF4E15835A /* HomeView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05D9D92AD37310CF625050E2 /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
+		5197BBC879D7F3BF4E15835A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		79BA7CA1C1850F793DCA3D51 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		7C49CBC336062921900D2AE6 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		7DC252F2C97B21DC5EF5A2AC /* Janggi.storekit */ = {isa = PBXFileReference; path = Janggi.storekit; sourceTree = "<group>"; };
+		9364F0B19DB03171D88EFDE9 /* AIEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIEngine.swift; sourceTree = "<group>"; };
+		A72C2F2B9C3835463F8A9A07 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		AE370F88D2F74496D3962FA7 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		BEE349046022DE8AF1AAE4D9 /* JanggiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JanggiApp.swift; sourceTree = "<group>"; };
+		CBD40BBFABA179C1759A3824 /* Janggi.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Janggi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF8115E21B06F8A360EF791B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		DB9D96A7BD0A9FEB412F0B19 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		F753729D1D3B7DE86291DD80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		27B66E85AD380EAC25EE9EA8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3179A23B47DDE0C866257583 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9364F0B19DB03171D88EFDE9 /* AIEngine.swift */,
+				79BA7CA1C1850F793DCA3D51 /* Board.swift */,
+				CF8115E21B06F8A360EF791B /* GameModel.swift */,
+				AE370F88D2F74496D3962FA7 /* Piece.swift */,
+				DB9D96A7BD0A9FEB412F0B19 /* PurchaseManager.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3AEFDABC42C4C337B921749A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7C49CBC336062921900D2AE6 /* GameView.swift */,
+				5197BBC879D7F3BF4E15835A /* HomeView.swift */,
+				05D9D92AD37310CF625050E2 /* UpgradeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5D43493A5FE183BA1B70E1D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CBD40BBFABA179C1759A3824 /* Janggi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A064303B0915012BE64693DE /* Janggi */ = {
+			isa = PBXGroup;
+			children = (
+				F753729D1D3B7DE86291DD80 /* Assets.xcassets */,
+				BEE349046022DE8AF1AAE4D9 /* JanggiApp.swift */,
+				A72C2F2B9C3835463F8A9A07 /* PrivacyInfo.xcprivacy */,
+				3179A23B47DDE0C866257583 /* Core */,
+				27B66E85AD380EAC25EE9EA8 /* Preview Content */,
+				3AEFDABC42C4C337B921749A /* Views */,
+			);
+			path = Janggi;
+			sourceTree = "<group>";
+		};
+		F8556BEA639D1B9346F74B13 = {
+			isa = PBXGroup;
+			children = (
+				7DC252F2C97B21DC5EF5A2AC /* Janggi.storekit */,
+				A064303B0915012BE64693DE /* Janggi */,
+				5D43493A5FE183BA1B70E1D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		41FD3211F1953BC9CC688D61 /* Janggi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E79957D08CCE42818C72EA0E /* Build configuration list for PBXNativeTarget "Janggi" */;
+			buildPhases = (
+				38807C95F08F34FC0CD2E9D8 /* Sources */,
+				22447E252B774BF87B47F922 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Janggi;
+			packageProductDependencies = (
+			);
+			productName = Janggi;
+			productReference = CBD40BBFABA179C1759A3824 /* Janggi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B18B549D7F0E539F8071D048 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					41FD3211F1953BC9CC688D61 = {
+						DevelopmentTeam = SM99L22Q84;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B0B3B529BC44AC9DE0DD6218 /* Build configuration list for PBXProject "Janggi" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F8556BEA639D1B9346F74B13;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5D43493A5FE183BA1B70E1D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				41FD3211F1953BC9CC688D61 /* Janggi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22447E252B774BF87B47F922 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B56414183DD4D7CD29287D61 /* Assets.xcassets in Resources */,
+				433EF0BBBF0D620B4D216DF7 /* Janggi.storekit in Resources */,
+				ADFF49262297348D2D8E22E3 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38807C95F08F34FC0CD2E9D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83B5F5361DEBBAC0BD741861 /* AIEngine.swift in Sources */,
+				B36EFCB438F6A649C0B91890 /* Board.swift in Sources */,
+				B3C9B9A6A21F361CC7031F84 /* GameModel.swift in Sources */,
+				3A28DDA79D2E80804A2279EB /* GameView.swift in Sources */,
+				FB1F7868A7B10BCA60D4580E /* HomeView.swift in Sources */,
+				A5150C1F3FEB5417705914F0 /* JanggiApp.swift in Sources */,
+				82E0414852025987E376FADC /* Piece.swift in Sources */,
+				162DD003DDF444014AA0EC75 /* PurchaseManager.swift in Sources */,
+				38155DD74C053AD622766B24 /* UpgradeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0010EB4C61E9FC9047887955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SM99L22Q84;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		12DC961BD55F481DC9CBF3D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Janggi;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.quyenngo.janggi;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1E1D07A44D8E7A75323FF308 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SM99L22Q84;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		984A4B882533D1180039A3E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Janggi;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.quyenngo.janggi;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B0B3B529BC44AC9DE0DD6218 /* Build configuration list for PBXProject "Janggi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0010EB4C61E9FC9047887955 /* Debug */,
+				1E1D07A44D8E7A75323FF308 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E79957D08CCE42818C72EA0E /* Build configuration list for PBXNativeTarget "Janggi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12DC961BD55F481DC9CBF3D1 /* Debug */,
+				984A4B882533D1180039A3E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B18B549D7F0E539F8071D048 /* Project object */;
+}

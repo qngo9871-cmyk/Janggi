@@ -1,0 +1,35 @@
+{
+  "identifier" : "9B4A3C2F-5E6D-7F8A-9B0C-1D2E3F4A5B6C",
+  "type" : "com.apple.storekit-configuration",
+  "version" : 3,
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "E2F3A4B5-C6D7-8E9F-0A1B-2C3D4E5F6A7B",
+      "localizations" : [
+        {
+          "description" : "Unlock Medium & Expert AI and Play vs Friend",
+          "displayName" : "Janggi Pro Unlock",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.quyenngo.janggi.pro",
+      "referenceName" : "Janggi Pro Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_developerTeamID" : "SM99L22Q84",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      }
+    ]
+  }
+}
