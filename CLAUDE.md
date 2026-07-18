@@ -30,18 +30,39 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
-- **2026-07-18 — v1.0.0 (build 1), core build complete, verified, not yet submitted.**
+- **2026-07-18 — v1.0 (build 1), fully submitted to App Store Connect except two manual UI-only steps.**
 - Rules engine hand-verified via a standalone test harness (general starting positions, palace diagonal moves incl. blocking by own guardians, cannon screen requirement incl. the zero-legal-moves-at-start case, soldier sideways-from-start, elephant hobbling, check detection) — all passed.
-- Simulator + device builds both pass clean (`rebuild.sh`).
-- Visually verified via DEBUG `JG_CAPTURE` screenshots: continuous board (no river), palace X-diagonals both ends, octagonal pieces, Han=red/Cho=blue coloring, correct hanja (漢/楚 General, 士 Guard, 象 Elephant, 馬 Horse, 車 Chariot, 包 Cannon, 兵/卒 Soldier), Pass button, "Cho's turn" turn indicator, scripted opening sequence executes cleanly.
-- **Not yet done**: real app icon (current one is a script-generated placeholder — cinnabar octagon + 漢), ASC app record / bundle ID registration, IAP creation, age rating, Korean-locale metadata (name/subtitle/keywords/description/screenshots), legal pages (privacy/terms/support — needs its own repo, 4-page nightease pattern), final ASO naming decision, App Store submission.
+- Simulator + device builds both pass clean (`rebuild.sh`); Release archive + export + altool upload succeeded, build processed to `VALID` and attached to appStoreVersion 1.0.
+- Visually verified via DEBUG `JG_CAPTURE` screenshots: continuous board (no river), palace X-diagonals both ends, octagonal pieces, Han=red/Cho=blue coloring, correct hanja, Pass button, "Cho's turn" turn indicator, scripted opening sequence executes cleanly.
+- App icon refined to a bold octagon+漢 emblem (was a quick placeholder).
+- ASC app created manually (name collision on the first attempt — "Janggi - Korean Chess" was taken/reserved; **"Janggi - Korean Chess AI"** went through). App ID `6792245733`.
+- Bundle ID `com.quyenngo.janggi` registered (ASC bundle record `3Y7BXFVMVU`).
+- Legal pages live: `qngo9871-cmyk/janggi-legal` → https://qngo9871-cmyk.github.io/janggi-legal/ (privacy/terms/support/index, all verified 200).
+- Full ASC metadata pushed for **both en-US and ko locales** (name/subtitle/keywords/description/promo — see `docs/asc-metadata.md`), categories (Games → Board + Strategy), age rating (all-clear → confirmed **4+**, Korea age rating auto-computed as **ALL** — no separate GRAC filing needed, confirming the earlier research).
+- IAP `com.quyenngo.janggi.pro` (non-consumable, $1.99) created with en-US + ko localizations and pricing; App Store version + IAP review screenshots uploaded.
+- Copyright and App Review contact set on the version.
+- App confirmed available in Korea specifically (KOR automatic price point exists) — not Korea-exclusive, standard ~175-territory availability.
 
-## Identity (provisional, pending ASC registration)
-- **Bundle ID:** `com.quyenngo.janggi`
+**Two manual steps still needed before Submit (both UI-only, no API path exists):**
+1. **App Privacy nutrition labels** — must be filled in the ASC web UI (no data collected — should be a quick "no" pass).
+2. **Tick the IAP into this version, from the version's own page** (App Store version → "In-App Purchases and Subscriptions" section) — **never from the IAP's own page**, that creates an orphaned draft that can never be submitted (this exact trap hit Fence AI). Also worth double-checking the visionOS/iPhone-on-Mac availability toggles are unticked (both default ON).
+
+Once those two are done, Submit for Review is the only remaining step.
+
+**Known follow-up, not a blocker**: the IAP review screenshot shows "Unable to load purchase option" rather than a live $1.99 price — StoreKit sandbox testing needs either a signed-in sandbox tester or an Xcode-attached local StoreKit session, neither of which CLI-only tooling can set up. Cosmetic only; can be replaced with a cleaner capture later if desired.
+
+## Identity
+- **Bundle ID:** `com.quyenngo.janggi` (ASC bundle record `3Y7BXFVMVU`)
 - **Team ID:** `SM99L22Q84`
+- **ASC App ID:** `6792245733`
+- **App Store title:** "Janggi - Korean Chess AI" (the plain "Janggi - Korean Chess" name was rejected by ASC as a collision/reserved name)
+- **KR-locale title:** "장기 - Korean Chess"
+- **appStoreVersion (1.0) ID:** `bb50d61e-ca3b-494b-866e-66548aeb65ae`
+- **Build 1 ID:** `41589bd4-cca9-47d3-8be3-76d4957bc932` (state VALID, attached to the version)
 - **IAP product ID:** `com.quyenngo.janggi.pro` (non-consumable, $1.99, same Pro-unlock pattern as ChineseChess: Medium/Expert AI + Play vs Friend)
-- **Proposed title:** "Janggi - Korean Chess" (differentiates from competitors' bare "Janggi"/"Dr. Janggi"/"JangKi+"); needs a final ASO collision check before locking.
-- **KR-locale metadata**: not yet written — plan is a Korean title/subtitle/description pass before first submission (adding Korean later means an extra review cycle for a metadata-only update).
+- **IAP ASC ID:** `6792246555`
+- **Primary locale:** en-US; secondary locale: ko
+- **Categories:** Games (primary), Board + Strategy (subcategories)
 
 ## Korea App Store submission notes (researched 2026-07-18)
 - **No separate GRAC filing needed** — Apple auto-derives the KR-12/15/19 regional age rating from the standard ASC age-rating questionnaire (games category, no gambling content → expect a low rating).

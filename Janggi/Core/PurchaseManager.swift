@@ -123,7 +123,7 @@ class PurchaseManager: ObservableObject {
 
     func updateEntitlementStatus() async {
         #if DEBUG
-        isPro = true
+        isPro = ProcessInfo.processInfo.environment["JG_CAPTURE"] != "paywall"
         #else
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,

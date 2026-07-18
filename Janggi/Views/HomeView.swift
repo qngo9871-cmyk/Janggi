@@ -105,10 +105,17 @@ struct HomeView: View {
             }
             .onAppear {
                 #if DEBUG
-                // Screenshot capture: any JG_CAPTURE other than "home" jumps into a
-                // local (no-AI) game so the seeded board holds still. Inert in production.
-                if let name = ProcessInfo.processInfo.environment["JG_CAPTURE"], name != "home" {
-                    navigateToLocal = true
+                // Screenshot capture: "paywall" opens the IAP unlock sheet directly
+                // (isPro forced false for this one capture — see PurchaseManager).
+                // Any other JG_CAPTURE value jumps into a local (no-AI) game so the
+                // seeded board holds still. Inert in production.
+                if let name = ProcessInfo.processInfo.environment["JG_CAPTURE"] {
+                    if name == "paywall" {
+                        upgradeFeature = "Medium & Expert difficulty, and Play vs Friend"
+                        showUpgrade = true
+                    } else if name != "home" {
+                        navigateToLocal = true
+                    }
                 }
                 #endif
             }
