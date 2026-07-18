@@ -66,7 +66,11 @@ Set up the board and play your first game today.
 **Promotional Text (≤170):**
 `정통 장기를 3단계 AI 난이도와 오프라인 2인 대국 모드로 즐겨보세요. 구독 없이 한 번의 구매로 끝.`
 
-Same Support/Marketing/Privacy URLs as en-US (single legal-pages site, English-only — acceptable since it's not a submission gate, only the ASC metadata itself needs the ko locale).
+**Privacy Policy URL (ko):** https://qngo9871-cmyk.github.io/janggi-legal/privacy-ko.html
+**Support URL (ko):** https://qngo9871-cmyk.github.io/janggi-legal/support-ko.html
+**Marketing URL (ko):** https://qngo9871-cmyk.github.io/janggi-legal/
+
+Dedicated Korean-language legal pages (not just the en-US pages with a URL field filled) — ASC's per-locale requirement was initially satisfied with the English pages, but a Korean user landing on an English-only privacy policy is a real gap, not just a form technicality. `terms-ko.html` also exists (linked from the English `terms.html`) even though ASC has no separate per-locale Terms field to point at it.
 
 ---
 
