@@ -9,6 +9,7 @@ struct HomeView: View {
     @State private var navigateToLocal = false
     @State private var showUpgrade = false
     @State private var upgradeFeature = ""
+    @State private var showHowToPlay = false
 
     var body: some View {
         NavigationStack {
@@ -83,6 +84,12 @@ struct HomeView: View {
                 .buttonStyle(.bordered)
                 .controlSize(.large)
 
+                Button { showHowToPlay = true } label: {
+                    Text("How to Play")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
                 Spacer()
 
                 if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
@@ -102,6 +109,9 @@ struct HomeView: View {
             .sheet(isPresented: $showUpgrade) {
                 UpgradeView(feature: upgradeFeature)
                     .environmentObject(purchaseManager)
+            }
+            .sheet(isPresented: $showHowToPlay) {
+                OnboardingView(onFinished: { showHowToPlay = false })
             }
             .onAppear {
                 #if DEBUG

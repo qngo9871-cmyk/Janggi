@@ -6,7 +6,7 @@ struct JanggiApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ContentView()
                 .environmentObject(purchaseManager)
         }
     }
