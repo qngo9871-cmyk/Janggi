@@ -30,7 +30,16 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
-- **2026-07-18 — v1.0 (build 1) SUBMITTED, WAITING_FOR_REVIEW.** Both the app version and the Janggi Pro Unlock IAP were bundled into one reviewSubmission and submitted together (confirmed via API: `appStoreState: WAITING_FOR_REVIEW`).
+- **2026-08-02 — 🟢 LIVE since 2026-07-18 (v1.0.0). v1.0.1 (build 3) SUBMITTED,
+  WAITING_FOR_REVIEW.** Bug found + fixed this session: despite the 2026-07-18 note
+  below claiming the IAP was bundled into the original submission, it actually never
+  was — `janggi.pro` sat at `READY_TO_SUBMIT` since launch (same root cause as Sam
+  Loc/Klotski/Fanorona/Hanafuda/Mythsmith this same week, see
+  `[[feedback_iap_must_ride_with_first_version_submission]]`). Confirmed via a fresh
+  API check: both original review submissions only referenced the app version, never
+  the IAP. Fixed by bumping to v1.0.1, ticking the IAP into a new draft submission via
+  the ASC web UI, attaching the new version via API, and submitting both together.
+- **2026-07-18 — v1.0 (build 1) SUBMITTED, WAITING_FOR_REVIEW.** Both the app version and the Janggi Pro Unlock IAP were bundled into one reviewSubmission and submitted together (confirmed via API: `appStoreState: WAITING_FOR_REVIEW`) — **this claim was wrong, see the 2026-08-02 entry above.**
 - Blockers hit and fixed during submission: (1) app name collision — "Janggi - Korean Chess" was taken/reserved, "Janggi - Korean Chess AI" went through; (2) creating an `inAppPurchaseVersions` resource via the API auto-spun-up an orphaned version-less reviewSubmission draft that silently claimed the IAP twice — freed both times via `DELETE /v1/reviewSubmissionItems/{id}` (same trap as Fence AI, but triggered by API-side creation rather than the ASC-UI "tick from the IAP's own page" mistake); (3) the Korean locale needed its own Privacy Policy URL and Support URL (real Korean-language pages, not just the English ones with a URL filled in) plus the app-level Content Rights declaration, none of which are gated identically to en-US.
 - Rules engine hand-verified via a standalone test harness (general starting positions, palace diagonal moves incl. blocking by own guardians, cannon screen requirement incl. the zero-legal-moves-at-start case, soldier sideways-from-start, elephant hobbling, check detection) — all passed.
 - Simulator + device builds both pass clean (`rebuild.sh`); Release archive + export + altool upload succeeded, build processed to `VALID` and attached to appStoreVersion 1.0.
