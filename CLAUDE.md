@@ -30,6 +30,23 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
+- **2026-08-03 — checkmate-detection bug fix, still v1.0.1 but build 3→4.** While
+  fixing a user-reported false-checkmate bug in the sibling ChineseChess app (this
+  engine's fork source), found the identical bug here: `Board.isInCheck`'s horse check
+  pattern had every blocking-leg offset sign-inverted — copy-pasted verbatim from
+  Xiangqi along with the rest of the fork. Verified via a from-scratch Python
+  ground-truth harness (reverse-lookup: does any enemy piece's real move list contain
+  the king's square) cross-validated over 300 random games: **121 divergences** before
+  the fix (worse than Xiangqi's 49/500 — Janggi horses have no river to slow their
+  approach to the enemy general, so they reach checking range faster), **0** after.
+  Independently re-verified the Janggi-specific elephant-check pattern (Xiangqi has no
+  equivalent — Xiangqi elephants never cross the river so can never check) is correct,
+  0 mismatches. v1.0.1 (build 3) was still `WAITING_FOR_REVIEW` and unreleased —
+  canceled that reviewSubmission (`PATCH canceled:true`, freed the version per
+  `[[asc-resubmit-after-rejection]]`), bumped to build 4, archived/exported/uploaded,
+  waiting on Apple processing before re-attaching + resubmitting under the same
+  `1.0.1` version string (no marketing-version bump needed since 1.0.1 was never
+  released).
 - **2026-08-02 — 🟢 LIVE since 2026-07-18 (v1.0.0). v1.0.1 (build 3) SUBMITTED,
   WAITING_FOR_REVIEW.** Bug found + fixed this session: despite the 2026-07-18 note
   below claiming the IAP was bundled into the original submission, it actually never
