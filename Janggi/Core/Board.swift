@@ -148,14 +148,16 @@ struct Board {
         // 2. Horse attacks — check all 8 positions a horse could attack from,
         //    verifying the blocking leg is clear.
         let horseMoves: [(fx: Int, fy: Int, bx: Int, by: Int)] = [
-            (-1, -2, 0, -1), (1, -2, 0, -1),
-            (-1,  2, 0,  1), (1,  2, 0,  1),
-            (-2, -1, -1, 0), (-2,  1, -1, 0),
-            ( 2, -1,  1, 0), ( 2,  1,  1, 0),
+            (-1, -2, 0,  1), (1, -2, 0,  1),
+            (-1,  2, 0, -1), (1,  2, 0, -1),
+            (-2, -1, 1,  0), (-2,  1, 1,  0),
+            ( 2, -1, -1, 0), ( 2,  1, -1, 0),
         ]
         for hm in horseMoves {
             let hx = kx + hm.fx, hy = ky + hm.fy
             guard hx >= 0 && hx <= 8 && hy >= 0 && hy <= 9 else { continue }
+            // The blocking square is relative to the horse's position, not the king's —
+            // one step from the horse *toward* the king along the move's long axis.
             let bx = hx + hm.bx, by = hy + hm.by
             guard bx >= 0 && bx <= 8 && by >= 0 && by <= 9 else { continue }
             if gridAt(bx, by) != nil { continue } // leg is blocked, horse can't reach
