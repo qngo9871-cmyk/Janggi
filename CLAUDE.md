@@ -43,10 +43,12 @@ Official piece values (material scoring, ×100 scaled for AI eval, single source
   equivalent — Xiangqi elephants never cross the river so can never check) is correct,
   0 mismatches. v1.0.1 (build 3) was still `WAITING_FOR_REVIEW` and unreleased —
   canceled that reviewSubmission (`PATCH canceled:true`, freed the version per
-  `[[asc-resubmit-after-rejection]]`), bumped to build 4, archived/exported/uploaded,
-  waiting on Apple processing before re-attaching + resubmitting under the same
-  `1.0.1` version string (no marketing-version bump needed since 1.0.1 was never
-  released).
+  `[[asc-resubmit-after-rejection]]`), bumped to build 4, archived/exported/uploaded.
+  Build processed to `VALID`, attached to version `f7295b99-7ef2-46a9-af47-4d11cb0cfa2c`
+  (still `1.0.1` — no marketing-version bump needed since 1.0.1 was never released),
+  new reviewSubmission `cf6bde51-4972-4f2d-8632-93914b307aad` created and submitted
+  clean (no IAP/locale snags this time). **🟢 SUBMITTED, WAITING_FOR_REVIEW (2026-08-03,
+  build 4).**
 - **2026-08-02 — 🟢 LIVE since 2026-07-18 (v1.0.0). v1.0.1 (build 3) SUBMITTED,
   WAITING_FOR_REVIEW.** Bug found + fixed this session: despite the 2026-07-18 note
   below claiming the IAP was bundled into the original submission, it actually never
