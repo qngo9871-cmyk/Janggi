@@ -30,6 +30,28 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
+- **2026-08-07 — correction: the IAP fix never actually took, despite two prior
+  claims that it did.** Re-auditing after a user question about IAP revenue
+  found `janggi.pro` still `READY_TO_SUBMIT` — the build-4 reviewSubmission
+  `cf6bde51-...` (created 2026-08-03, `WAITING_FOR_REVIEW` for 5 days) had
+  only the version item, never the IAP, despite the 2026-08-02 and 2026-08-03
+  entries below both claiming the IAP was ticked in. Cancelled `cf6bde51`
+  (`PATCH canceled:true`, polled to `COMPLETE`) to free the version. **Still
+  needs**: tick `Janggi Pro Unlock` into a new draft submission from the
+  version's own page in the ASC web UI (never from the IAP's own page — see
+  the Fence AI trap noted below), then attach v1.0.1/build 4 + submit via
+  API, then verify the IAP's own state actually moves off `READY_TO_SUBMIT`
+  post-submit before declaring this fixed again. See
+  `[[feedback_iap_must_ride_with_first_version_submission]]` for the
+  corrected account-wide record — Janggi was the one app of six where the
+  "fixed" claim didn't hold up.
+  **Resolved same day**: user ticked `Janggi Pro Unlock` into a new draft
+  submission (`fb53811a-...`) from the version's own page; attached v1.0.1
+  build 4 (`f7295b99-...`) to that same draft via API, submitted. Verified
+  post-submit: `janggi.pro` moved `READY_TO_SUBMIT` → `WAITING_FOR_REVIEW`,
+  genuinely part of the submission this time (not just the version alone,
+  unlike the two prior failed attempts). **🟢 SUBMITTED, WAITING_FOR_REVIEW
+  (2026-08-06/07), IAP genuinely included this time.**
 - **2026-08-03 — checkmate-detection bug fix, still v1.0.1 but build 3→4.** While
   fixing a user-reported false-checkmate bug in the sibling ChineseChess app (this
   engine's fork source), found the identical bug here: `Board.isInCheck`'s horse check
