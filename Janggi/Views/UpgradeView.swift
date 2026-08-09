@@ -14,28 +14,28 @@ struct UpgradeView: View {
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
 
-            Text("Unlock Full Game")
+            Text(L("upgrade.title"))
                 .font(.title2.bold())
 
-            Text("\(feature) is available with the full version.")
+            Text(L("upgrade.feature_available", feature))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
 
             VStack(spacing: 8) {
-                Text("What you get:")
+                Text(L("upgrade.what_you_get"))
                     .font(.subheadline.bold())
                 HStack(spacing: 6) {
                     Image(systemName: "checkmark")
                         .foregroundColor(.green)
-                    Text("Medium & Expert AI difficulty")
+                    Text(L("upgrade.feature_medium_expert"))
                         .font(.subheadline)
                 }
                 HStack(spacing: 6) {
                     Image(systemName: "checkmark")
                         .foregroundColor(.green)
-                    Text("Play vs Friend mode")
+                    Text(L("upgrade.feature_play_vs_friend"))
                         .font(.subheadline)
                 }
             }
@@ -58,7 +58,7 @@ struct UpgradeView: View {
                             ProgressView()
                                 .frame(maxWidth: .infinity)
                         } else {
-                            Text("Unlock Full Game — \(product.displayPrice)")
+                            Text(L("upgrade.unlock_button", product.displayPrice))
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
                         }
@@ -68,25 +68,25 @@ struct UpgradeView: View {
                     .disabled(purchaseManager.isPurchasing)
                 } else if purchaseManager.productLoadFailed {
                     VStack(spacing: 8) {
-                        Text("Unable to load purchase option.")
+                        Text(L("upgrade.load_failed"))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
-                        Text("Please check your connection and try again.")
+                        Text(L("upgrade.check_connection"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Button("Try Again") {
+                        Button(L("upgrade.try_again")) {
                             Task { await purchaseManager.loadProduct() }
                         }
                         .buttonStyle(.bordered)
                     }
                 } else {
-                    ProgressView("Loading...")
+                    ProgressView(L("upgrade.loading"))
                 }
 
                 Button {
                     Task { await purchaseManager.restorePurchases() }
                 } label: {
-                    Text("Restore Purchase")
+                    Text(L("upgrade.restore"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

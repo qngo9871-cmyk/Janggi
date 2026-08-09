@@ -9,10 +9,10 @@ struct OnboardingView: View {
     @State private var page = 0
 
     private let pages: [(title: String, body: String)] = [
-        ("Capture the General", "Corner the opponent's General (漢 or 楚) with no safe move left. Cho (blue) always moves first."),
-        ("Tap to Move", "Tap one of your pieces to see its legal moves highlighted, then tap a highlighted spot to move there."),
-        ("Every Piece Moves Differently", "General & Guard (士) stay in the palace, even diagonally on the marked lines. Chariot (車) slides any distance. Cannon (包) must jump exactly one piece to move or capture. Horse (馬) and Elephant (象) leap and can be blocked. Soldiers (兵/卒) move forward or sideways only, never back."),
-        ("Passing Is Normal", "No good move? Tap Pass. It's a legal move in Janggi whenever you're not in check — not a resignation."),
+        (L("onboarding.page1.title"), L("onboarding.page1.body")),
+        (L("onboarding.page2.title"), L("onboarding.page2.body")),
+        (L("onboarding.page3.title"), L("onboarding.page3.body")),
+        (L("onboarding.page4.title"), L("onboarding.page4.body")),
     ]
 
     var body: some View {
@@ -40,7 +40,7 @@ struct OnboardingView: View {
             Spacer()
 
             Button(action: advance) {
-                Text(page == pages.count - 1 ? "Let's Play" : "Next")
+                Text(page == pages.count - 1 ? L("onboarding.lets_play") : L("onboarding.next"))
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)

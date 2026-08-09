@@ -27,10 +27,10 @@ struct HomeView: View {
 
                 // AI game section
                 VStack(spacing: 12) {
-                    Picker("Difficulty", selection: $selectedDifficulty) {
+                    Picker(L("home.difficulty_picker"), selection: $selectedDifficulty) {
                         ForEach(AIDifficulty.allCases) { level in
                             HStack {
-                                Text(level.rawValue)
+                                Text(level.displayName)
                                 if level.requiresPro && !purchaseManager.isPro {
                                     Image(systemName: "lock.fill")
                                 }
@@ -42,20 +42,20 @@ struct HomeView: View {
                     .frame(maxWidth: 280)
                     .onChange(of: selectedDifficulty) { _, newValue in
                         if newValue.requiresPro && !purchaseManager.isPro {
-                            upgradeFeature = "\(newValue.rawValue) difficulty"
+                            upgradeFeature = L("home.upgrade_feature.difficulty", newValue.displayName)
                             showUpgrade = true
                         }
                     }
 
                     Button {
                         if selectedDifficulty.requiresPro && !purchaseManager.isPro {
-                            upgradeFeature = "\(selectedDifficulty.rawValue) difficulty"
+                            upgradeFeature = L("home.upgrade_feature.difficulty", selectedDifficulty.displayName)
                             showUpgrade = true
                         } else {
                             navigateToAI = true
                         }
                     } label: {
-                        Label("Play vs AI", systemImage: "cpu")
+                        Label(L("home.play_vs_ai"), systemImage: "cpu")
                             .frame(maxWidth: 220)
                     }
                     .buttonStyle(.borderedProminent)
@@ -65,14 +65,14 @@ struct HomeView: View {
                 // Local two-player
                 Button {
                     if !purchaseManager.isPro {
-                        upgradeFeature = "Play vs Friend"
+                        upgradeFeature = L("home.upgrade_feature.play_vs_friend")
                         showUpgrade = true
                     } else {
                         navigateToLocal = true
                     }
                 } label: {
                     HStack {
-                        Label("Play vs Friend", systemImage: "person.2")
+                        Label(L("home.play_vs_friend"), systemImage: "person.2")
                             .frame(maxWidth: 190)
                         if !purchaseManager.isPro {
                             Image(systemName: "lock.fill")
@@ -85,7 +85,7 @@ struct HomeView: View {
                 .controlSize(.large)
 
                 Button { showHowToPlay = true } label: {
-                    Text("How to Play")
+                    Text(L("home.how_to_play"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -121,7 +121,7 @@ struct HomeView: View {
                 // seeded board holds still. Inert in production.
                 if let name = ProcessInfo.processInfo.environment["JG_CAPTURE"] {
                     if name == "paywall" {
-                        upgradeFeature = "Medium & Expert difficulty, and Play vs Friend"
+                        upgradeFeature = L("home.upgrade_feature.paywall_capture")
                         showUpgrade = true
                     } else if name != "home" {
                         navigateToLocal = true

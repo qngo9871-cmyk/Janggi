@@ -30,6 +30,81 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
+- **2026-08-09 — pre-resubmission quality review (part of the 19-app Guideline
+  5.6 account-hold remediation pass; resubmission blocked until 2026-08-18).
+  Local-only: nothing touched in App Store Connect.** 🟡 **READY FOR
+  RESUBMISSION AFTER 2026-08-18**, pending Apple's 5.6 hold lifting.
+  - **Checkmate-detection re-verification (the known-issue area for this
+    session):** hand-traced all 8 horse-check offset pairs in
+    `Board.isInCheck` against `horseMoves`' own offsets and confirmed the
+    2026-08-03 sign fix is still intact and mathematically correct (every
+    pair's blocking-leg offset matches what `horseMoves` would produce from
+    the horse's own position). Independently re-verified the
+    Janggi-specific elephant-check pattern the same way — also correct, no
+    regression. No code change needed here; this was verification only.
+  - **Build:** clean `xcodegen generate` + `xcodebuild build` for both
+    Simulator and device (`generic/platform=iOS` and
+    `generic/platform=iOS Simulator`) — **0 errors, 0 warnings** (the only
+    log line is a benign "no AppIntents.framework dependency" notice, not a
+    real warning), both before and after this session's changes.
+  - **Localization — was previously a real gap, now fixed:** the app had
+    *zero* in-app localization infrastructure before this session (ASC
+    listing had EN + ko locales, but every UI string was a hardcoded English
+    literal). Added `Janggi/Core/Localization.swift` (`L(_ key:, _ args:)`
+    helper over `NSLocalizedString` + `String(format:)`) plus
+    `Resources/en.lproj/Localizable.strings` and
+    `Resources/ko.lproj/Localizable.strings` (60+ keys). Converted every
+    user-facing string across `HomeView`, `UpgradeView`, `OnboardingView`,
+    `GameView`, `PurchaseManager`, and `AIDifficulty.displayName` to route
+    through `L()`. Used authentic Janggi terminology for Korean, not literal
+    translation — e.g. "장군" for check, "외통수" for checkmate, "초급/중급/고급"
+    for difficulty tiers, "한/초" for the side names (matching the 漢/楚 hanja
+    already on the pieces). Added `knownRegions: [en, ko]` to `project.yml`.
+    **Visually verified live in the iOS 17 Simulator** with
+    `-AppleLanguages "(ko)" -AppleLocale "ko_KR"`: onboarding correctly
+    renders "장군을 잡아라" / "다음" etc. — confirmed real runtime localization,
+    not just App Store listing text. (Brand name "Janggi" / "장기 · Korean
+    Chess" subtitle deliberately left as bilingual literals — that's
+    intentional branding, not a localization gap.)
+  - **Onboarding:** confirmed real and forced on first launch (`ContentView`
+    gates on `@AppStorage("hasSeenOnboarding")`), 4 genuine content pages
+    (goal, tap-to-move, per-piece movement cheatsheet, the pass rule),
+    re-reachable from Home via "How to Play." No changes needed, just
+    localized.
+  - **DEBUG/isPro double-gating** (the recurring bug pattern flagged across
+    this developer's portfolio): checked, **not present**. Single
+    `@Published var isPro` source of truth in `PurchaseManager`, every
+    consumer (`HomeView`, `UpgradeView`) reads the same property; the
+    `#if DEBUG` override only exists to force the paywall open for
+    screenshot capture (`JG_CAPTURE == "paywall"`) and doesn't leak into
+    Release builds.
+  - **TODO/FIXME/placeholder/dummy-text grep:** zero hits across the whole
+    codebase.
+  - **Genuine differentiation addition (small, per the "polish not redesign"
+    guidance):** added a captured-material tray to `GameView` — each side's
+    captured enemy pieces now render as small hanja glyphs above the board,
+    tracked in `GameModel.capturedByCho` / `capturedByHan`. Real Janggi-
+    relevant UX (material balance matters more here than in Western chess,
+    no pawn promotion to offset losses), not a cosmetic reskin change.
+  - **Version bump:** `MARKETING_VERSION` 1.0.1 → **1.0.2**,
+    `CURRENT_PROJECT_VERSION` 4 → **5** (`project.yml`, base settings).
+  - **Not touched this session** (already solid, re-verified only): rules
+    engine correctness elsewhere (palace diagonals, elephant stretched leap,
+    cannon screen requirement, soldier sideways-from-start, legal-pass /
+    no-stalemate design) — re-read in full, no issues found; IAP wiring
+    (`PurchaseManager` uses standard StoreKit 2 `Transaction.currentEntitlements`
+    + `Transaction.updates` listener pattern, correct); `PrivacyInfo.xcprivacy`
+    (empty collected-data array, correct for a no-network app).
+  - **Still open / needs Q's judgment:** none blocking. Optional
+    follow-up: the App Store screenshots (`screenshots/v2/`) predate this
+    session's captured-tray addition and Korean-locale verification; not a
+    functional issue since screenshots aren't user-facing app behavior, just
+    worth a reshoot before the next ASC push if Q wants the marketing
+    screenshots to reflect the new tray. `capture_shots.py`'s `APP_DIR` is
+    still hardcoded to the old MacBook Air path (`/Users/user/Janggi`) from
+    before the Mac mini migration — didn't fix since script wasn't run this
+    session (see `[[mac-mini-migration-gaps]]`), but will need a path fix
+    before it's next used to regenerate screenshots.
 - **2026-08-07 — correction: the IAP fix never actually took, despite two prior
   claims that it did.** Re-auditing after a user question about IAP revenue
   found `janggi.pro` still `READY_TO_SUBMIT` — the build-4 reviewSubmission

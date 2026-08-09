@@ -68,7 +68,7 @@ class PurchaseManager: ObservableObject {
 
     func purchase() async {
         guard let product else {
-            purchaseError = "Product not available. Please try again."
+            purchaseError = L("purchase.error.not_available")
             return
         }
 
@@ -85,9 +85,9 @@ class PurchaseManager: ObservableObject {
             case .userCancelled:
                 break
             case .pending:
-                purchaseError = "Purchase is pending approval."
+                purchaseError = L("purchase.error.pending")
             @unknown default:
-                purchaseError = "An unexpected error occurred."
+                purchaseError = L("purchase.error.unexpected")
             }
         } catch {
             purchaseError = error.localizedDescription
@@ -105,7 +105,7 @@ class PurchaseManager: ObservableObject {
         do {
             try await AppStore.sync()
         } catch {
-            purchaseError = "Could not restore purchases. Please try again."
+            purchaseError = L("purchase.error.restore_failed")
             isPurchasing = false
             return
         }
@@ -113,7 +113,7 @@ class PurchaseManager: ObservableObject {
         await updateEntitlementStatus()
 
         if !isPro {
-            purchaseError = "No purchase found to restore."
+            purchaseError = L("purchase.error.nothing_to_restore")
         }
 
         isPurchasing = false

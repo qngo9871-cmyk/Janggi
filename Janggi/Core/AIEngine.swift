@@ -9,6 +9,16 @@ enum AIDifficulty: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Localized display name — `rawValue` stays a stable English identifier
+    /// (used for storage/logic), this is what the UI shows.
+    var displayName: String {
+        switch self {
+        case .beginner: return L("difficulty.beginner")
+        case .medium:   return L("difficulty.medium")
+        case .expert:   return L("difficulty.expert")
+        }
+    }
+
     var requiresPro: Bool {
         switch self {
         case .beginner: return false

@@ -1,0 +1,59 @@
+/* Home */
+"home.difficulty_picker" = "Difficulty";
+"home.play_vs_ai" = "Play vs AI";
+"home.play_vs_friend" = "Play vs Friend";
+"home.how_to_play" = "How to Play";
+"home.upgrade_feature.difficulty" = "%@ difficulty";
+"home.upgrade_feature.play_vs_friend" = "Play vs Friend";
+"home.upgrade_feature.paywall_capture" = "Medium & Expert difficulty, and Play vs Friend";
+
+/* AI difficulty */
+"difficulty.beginner" = "Beginner";
+"difficulty.medium" = "Medium";
+"difficulty.expert" = "Expert";
+
+/* Upgrade / paywall */
+"upgrade.title" = "Unlock Full Game";
+"upgrade.feature_available" = "%@ is available with the full version.";
+"upgrade.what_you_get" = "What you get:";
+"upgrade.feature_medium_expert" = "Medium & Expert AI difficulty";
+"upgrade.feature_play_vs_friend" = "Play vs Friend mode";
+"upgrade.unlock_button" = "Unlock Full Game — %@";
+"upgrade.load_failed" = "Unable to load purchase option.";
+"upgrade.check_connection" = "Please check your connection and try again.";
+"upgrade.try_again" = "Try Again";
+"upgrade.loading" = "Loading...";
+"upgrade.restore" = "Restore Purchase";
+
+/* Purchase errors (PurchaseManager) */
+"purchase.error.not_available" = "Product not available. Please try again.";
+"purchase.error.pending" = "Purchase is pending approval.";
+"purchase.error.unexpected" = "An unexpected error occurred.";
+"purchase.error.restore_failed" = "Could not restore purchases. Please try again.";
+"purchase.error.nothing_to_restore" = "No purchase found to restore.";
+
+/* Onboarding */
+"onboarding.page1.title" = "Capture the General";
+"onboarding.page1.body" = "Corner the opponent's General (漢 or 楚) with no safe move left. Cho (blue) always moves first.";
+"onboarding.page2.title" = "Tap to Move";
+"onboarding.page2.body" = "Tap one of your pieces to see its legal moves highlighted, then tap a highlighted spot to move there.";
+"onboarding.page3.title" = "Every Piece Moves Differently";
+"onboarding.page3.body" = "General & Guard (士) stay in the palace, even diagonally on the marked lines. Chariot (車) slides any distance. Cannon (包) must jump exactly one piece to move or capture. Horse (馬) and Elephant (象) leap and can be blocked. Soldiers (兵/卒) move forward or sideways only, never back.";
+"onboarding.page4.title" = "Passing Is Normal";
+"onboarding.page4.body" = "No good move? Tap Pass. It's a legal move in Janggi whenever you're not in check — not a resignation.";
+"onboarding.next" = "Next";
+"onboarding.lets_play" = "Let's Play";
+
+/* In-game */
+"game.new_game" = "New Game";
+"game.pass" = "Pass";
+"game.resign" = "Resign";
+"game.ok" = "OK";
+"game.side.han" = "Han";
+"game.side.cho" = "Cho";
+"game.turn_format" = "%@'s turn";
+"game.check_format" = "%@ is in CHECK";
+"game.checkmate" = "Checkmate";
+"game.wins_format" = "%@ wins!";
+"game.wins_by_checkmate_format" = "%@ wins by checkmate!";
+"game.checkmate_bang" = "Checkmate!";

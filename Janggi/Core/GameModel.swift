@@ -25,6 +25,14 @@ class GameModel: ObservableObject {
     @Published var validMovesForSelected: [Position] = []
     @Published var winner: PieceColor?
 
+    /// Pieces each side has captured so far, in capture order — drives the
+    /// captured-material tray in GameView. Genuine Janggi-relevant polish:
+    /// helps a player track the material balance at a glance, which matters
+    /// more here than in Western chess since Janggi has no pawn promotion to
+    /// offset losses.
+    @Published var capturedByCho: [Piece] = []  // Han pieces Cho has taken
+    @Published var capturedByHan: [Piece] = []  // Cho pieces Han has taken
+
     // MARK: Init
 
     init() {
@@ -72,7 +80,10 @@ class GameModel: ObservableObject {
 
     /// Execute a move, switch turns, and re-evaluate the game state.
     func executeMove(from origin: Position, to destination: Position) {
-        board.movePiece(from: origin, to: destination)
+        let mover = currentTurn
+        if let captured = board.movePiece(from: origin, to: destination) {
+            if mover == .cho { capturedByCho.append(captured) } else { capturedByHan.append(captured) }
+        }
         deselect()
         switchTurn()
         updateGameState()
@@ -121,6 +132,8 @@ class GameModel: ObservableObject {
         selectedPiece = nil
         validMovesForSelected = []
         winner = nil
+        capturedByCho = []
+        capturedByHan = []
     }
 
     /// The current player resigns — the opponent wins.

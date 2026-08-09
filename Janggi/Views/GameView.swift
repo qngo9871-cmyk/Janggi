@@ -41,6 +41,10 @@ struct GameView: View {
             turnIndicator
                 .padding(.top, 8)
 
+            // Captured-material tray — shows what each side has taken so far.
+            capturedTray
+                .padding(.top, 2)
+
             // Board area — its own GeometryReader so tap coordinates match drawing coordinates.
             GeometryReader { geo in
                 let cellSize = cellSize(in: geo.size)
@@ -64,8 +68,8 @@ struct GameView: View {
         .background(Color(red: 0.96, green: 0.89, blue: 0.72).ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
         .alert(endAlertTitle, isPresented: $showEndAlert) {
-            Button("New Game") { resetGame() }
-            Button("OK", role: .cancel) { }
+            Button(L("game.new_game")) { resetGame() }
+            Button(L("game.ok"), role: .cancel) { }
         }
         .onChange(of: game.gameState) {
             if game.gameState == .checkmate {
@@ -98,17 +102,48 @@ struct GameView: View {
         .padding(.vertical, 4)
     }
 
+    /// Localized display name for a side — 漢/楚 map to "Han"/"Cho" in English
+    /// and "한"/"초" in Korean (matching the hanja shown on the pieces).
+    private func sideName(_ color: PieceColor) -> String {
+        color == .han ? L("game.side.han") : L("game.side.cho")
+    }
+
     private var turnText: String {
         switch game.gameState {
         case .checkmate:
             if let w = game.winner {
-                return w == .han ? "Han wins!" : "Cho wins!"
+                return L("game.wins_format", sideName(w))
             }
-            return "Checkmate"
+            return L("game.checkmate")
         case .check:
-            return (game.currentTurn == .han ? "Han" : "Cho") + " is in CHECK"
+            return L("game.check_format", sideName(game.currentTurn))
         case .playing:
-            return (game.currentTurn == .han ? "Han" : "Cho") + "'s turn"
+            return L("game.turn_format", sideName(game.currentTurn))
+        }
+    }
+
+    // MARK: - Captured-material tray
+
+    private var capturedTray: some View {
+        // Left: Han pieces Cho has captured. Right: Cho pieces Han has captured.
+        // Each glyph keeps its own side's color so it's immediately readable as
+        // "captured enemy material," not confused with the capturing side.
+        HStack {
+            capturedRow(pieces: game.capturedByCho)
+            Spacer()
+            capturedRow(pieces: game.capturedByHan)
+        }
+        .padding(.horizontal, 16)
+        .frame(minHeight: 20)
+    }
+
+    private func capturedRow(pieces: [Piece]) -> some View {
+        HStack(spacing: 2) {
+            ForEach(pieces) { piece in
+                Text(piece.displayCharacter)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor((piece.color == .han ? Color.red : Color.blue).opacity(0.55))
+            }
         }
     }
 
@@ -116,12 +151,12 @@ struct GameView: View {
 
     private var buttonBar: some View {
         HStack(spacing: 20) {
-            Button("New Game") { resetGame() }
+            Button(L("game.new_game")) { resetGame() }
                 .buttonStyle(.bordered)
-            Button("Pass") { passTurn() }
+            Button(L("game.pass")) { passTurn() }
                 .buttonStyle(.bordered)
                 .disabled(aiThinking || game.gameState != .playing)
-            Button("Resign") { resignGame() }
+            Button(L("game.resign")) { resignGame() }
                 .buttonStyle(.bordered)
                 .disabled(game.gameState == .checkmate)
         }
@@ -273,9 +308,9 @@ struct GameView: View {
         switch game.gameState {
         case .checkmate:
             if let w = game.winner {
-                return w == .han ? "Han wins by checkmate!" : "Cho wins by checkmate!"
+                return L("game.wins_by_checkmate_format", sideName(w))
             }
-            return "Checkmate!"
+            return L("game.checkmate_bang")
         default:
             return ""
         }
