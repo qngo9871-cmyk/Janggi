@@ -30,6 +30,24 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
+
+## Build staged for resubmission (2026-08-13)
+
+Archived, exported, and uploaded a Release build ahead of the staggered resubmission — still
+blocked until 2026-08-18 by the Guideline 5.6 account-level hold, this app resubmits
+**2026-09-03** (batch 6). Build **1.0.3 (6)** uploaded via
+`xcrun altool --upload-app` (Delivery UUID `ae6eacdb-a527-4af8-8fe6-2f6d83bb9362`), processed to `VALID` by Apple, and
+attached to the existing `REJECTED` appStoreVersion (id `f7295b99-7ef2-46a9-af47-4d11cb0cfa2c`) via a direct
+`PATCH appStoreVersions/{id}/relationships/build` API call — independently re-verified via a
+follow-up `GET` on the same relationship, not just trusted from the PATCH's 204 response.
+
+**Deliberately NOT done yet** — waiting for the user's explicit go-ahead on this app's
+scheduled date, per the staggered resubmission plan:
+1. Tick the Pro IAP into this version in the App Store Connect **web UI** — the API has no
+   way to do this; it must be done from the version's own page (not the IAP's own page, which
+   creates an orphaned draft submission — a mistake this portfolio hit once before).
+2. Submit for review.
+
 - **2026-08-12 — second (deeper) polish pass, batch 6 (resubmits 2026-09-03).
   Local + ASC metadata/screenshots only — no build uploaded, no
   review-submission touched, per the hard "don't submit" constraint.**
