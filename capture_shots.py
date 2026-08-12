@@ -8,7 +8,7 @@ import os, re, subprocess, time
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-APP_DIR = Path("/Users/user/Janggi")
+APP_DIR = Path(__file__).resolve().parent
 PROJECT = APP_DIR / "Janggi.xcodeproj"
 SCHEME = "Janggi"
 BUNDLE = "com.quyenngo.janggi"
@@ -28,14 +28,31 @@ SHOTS = [
 def sh(*a, **k): return subprocess.run(a, check=True, capture_output=True, text=True, **k)
 
 
+DEDICATED_DEVICE_NAME = "Janggi-Capture"
+
+
 def find_device():
+    # Use a dedicated, app-named simulator device rather than a generic shared
+    # name — running this alongside other apps' concurrent capture scripts on a
+    # shared simulator has previously captured a DIFFERENT app's UI by mistake.
     out = subprocess.run(["xcrun", "simctl", "list", "devices", "available"],
                          capture_output=True, text=True).stdout
     for line in out.splitlines():
-        m = re.search(r"^\s*(iPhone .*Pro Max)\s+\(([0-9A-F\-]{36})\)", line)
+        m = re.search(rf"^\s*{re.escape(DEDICATED_DEVICE_NAME)}\s+\(([0-9A-F\-]{{36}})\)", line)
         if m:
-            return m.group(2), m.group(1)
-    raise SystemExit("No available 'iPhone ... Pro Max' simulator found")
+            return m.group(1), DEDICATED_DEVICE_NAME
+    # Not created yet — create it against a modern iPhone Pro Max device type.
+    devtypes = subprocess.run(["xcrun", "simctl", "list", "devicetypes"],
+                              capture_output=True, text=True).stdout
+    dt = None
+    for line in devtypes.splitlines():
+        m = re.search(r"^\s*(iPhone .*Pro Max)\s+\(", line)
+        if m:
+            dt = m.group(1)
+    if not dt:
+        raise SystemExit("No 'iPhone ... Pro Max' device type found to create the dedicated simulator")
+    udid = sh("xcrun", "simctl", "create", DEDICATED_DEVICE_NAME, dt).stdout.strip()
+    return udid, DEDICATED_DEVICE_NAME
 
 
 def build_app():

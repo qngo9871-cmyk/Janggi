@@ -30,6 +30,136 @@ Multiple 2026-07 app scouts (games/kids-ed, casual puzzle, Monopoly/Risk-style) 
 Official piece values (material scoring, ×100 scaled for AI eval, single source of truth at `PieceType.materialValue` in `Piece.swift`): General 10000 (sentinel), Chariot 1300, Cannon 700, Horse 500, Elephant 300, Guard 300, Soldier 200.
 
 ## Current State
+- **2026-08-12 — second (deeper) polish pass, batch 6 (resubmits 2026-09-03).
+  Local + ASC metadata/screenshots only — no build uploaded, no
+  review-submission touched, per the hard "don't submit" constraint.**
+  🟡 **READY FOR RESUBMISSION 2026-09-03** (staggered schedule, do not
+  submit early).
+  - **Localization re-verification (this session's highest-stakes check,
+    same rigor as Tiến Lên's card-back check):** confirmed real, not
+    regressed.
+    1. Diffed the sorted key sets of `en.lproj/Localizable.strings` (48
+       keys) vs `ko.lproj/Localizable.strings` (48 keys) — **byte-identical
+       key sets, zero diff.**
+    2. Grepped every `L("...")` call site across `Janggi/Views` and
+       `Janggi/Core` (48 unique keys used) and confirmed every one resolves
+       to a real string in both `.lproj` files — zero missing keys either
+       direction.
+    3. **Switched the running app's language live in the Simulator**
+       (`-AppleLanguages`/`-AppleLocale`, both `en`/`en_US` and `ko`/`ko_KR`)
+       and screenshotted four separate screens — onboarding, Home, in-game
+       (turn indicator + New Game/Pass/Resign), and the paywall — confirming
+       the UI text actually changes correctly in both languages at every
+       depth, not just onboarding. E.g. "Cho's turn"/"초 차례",
+       "New Game/Pass/Resign"/"새 게임/패스/기권", "Beginner/Medium/Expert"/
+       "초급/중급/고급", paywall "Unlock Full Version"/"전체 버전 잠금 해제". **No
+       gaps found — the 2026-08-09 localization work held up completely.**
+  - **Horse-check sign-fix re-verification:** independently hand-traced all
+    8 `Board.isInCheck` horse-check offset pairs against `horseMoves`' own
+    move-generation offsets (not just re-reading the prior claim) — every
+    pair's blocking-leg offset correctly derives from the horse's own
+    position, confirming the 2026-08-03 fix is still intact. No regression.
+  - **Real bug found and fixed: `01-home.png` (the App Store hero
+    screenshot) was actually capturing the onboarding screen, not Home.**
+    Root cause: `ContentView.swift`'s `#if DEBUG` block excluded
+    `JG_CAPTURE == "home"` from the onboarding bypass, so on a **freshly
+    installed app** (a fresh dedicated simulator, `hasSeenOnboarding`
+    defaults `false`) that specific capture value fell through to the
+    normal `!hasSeenOnboarding` check and showed onboarding instead of
+    Home. Confirmed via screenshot before the fix (showed "Capture the
+    General" onboarding page 1, not the Home screen), fixed by removing the
+    `capture != "home"` exclusion, rebuilt, recaptured, and reconfirmed —
+    `01-home.png` now correctly shows Home with the current version stamp
+    (`v1.0.2 (5)` → now `v1.0.3 (6)` after this session's bump). This is
+    the kind of bug that stays invisible on a reused/warm simulator (where
+    onboarding was already dismissed) and only surfaces on a clean device —
+    exactly the scenario the batch's "always use a dedicated simulator"
+    rule creates, so worth remembering for every future capture run.
+  - **Stale screenshots fixed:** `screenshots/v2/*.png` were captured under
+    v1.0.0 build 1 — predated the checkmate fix, the localization work, and
+    the captured-material tray (all from 2026-08-09). Recaptured all 5 on a
+    freshly created dedicated `Janggi-Capture` simulator device (not a
+    shared/generic name) to avoid the cross-app contamination other apps in
+    this batch hit; visually inspected every one, all correctly show
+    current app state.
+  - **UI polish check:** examined the `GameView` board layout (the
+    GeometryReader-centered board leaves a visible gap above/below the
+    board on tall screens) against the "top-hugging VStack / one-sided dead
+    space" bug pattern flagged elsewhere in this batch — measured
+    pixel-precise via the actual screenshot (top margin ~456px, bottom
+    margin ~335px out of a 2868px-tall capture) and concluded this is
+    legitimate GeometryReader centering, not the one-sided bug pattern seen
+    in Surakarta/Omweso. No fix made — verified, not invented.
+  - **`capture_shots.py` fixed:** `APP_DIR` was still hardcoded to the old
+    MacBook Air path (`/Users/user/Janggi`) — now resolves relative to the
+    script's own location. `find_device()` used to grab any available
+    "iPhone ... Pro Max" simulator by pattern match, which risks the
+    shared-simulator contamination bug that hit other apps this batch
+    (concurrent capture scripts writing to the same device) — now targets
+    (and creates if missing) a dedicated `Janggi-Capture` device by name.
+  - **`asc_push_janggi.py` bugs found and fixed** (read through before
+    trusting it, per house process):
+    - `find_editable_appinfo` read the wrong attribute key entirely
+      (`"state"` instead of the real `"appStoreState"`), so its editable-
+      state check never matched anything and it always fell through to
+      `infos[0]` — which order isn't guaranteed to be the editable one.
+    - `find_or_create_version` matched on a hardcoded
+      `versionString == "1.0"` — since v1.0 is the **live, READY_FOR_SALE**
+      version and v1.0.1 is the editable REJECTED one, this would have
+      silently pushed metadata onto the already-shipped live version
+      instead of the draft. Fixed to select the highest-versioned
+      non-locked (`READY_FOR_SALE`/`PENDING_DEVELOPER_RELEASE`/
+      `PROCESSING_FOR_APP_STORE`) version by real `appStoreState`.
+    - The version-creation fallback path hardcoded `releaseType: "MANUAL"`
+      instead of the house standard `AFTER_APPROVAL`.
+    - Verified the fix against the live API before trusting it: dry-run
+      confirmed `find_editable_appinfo` → `744cb3d8-...` (the REJECTED
+      appInfo) and `find_or_create_version` → `f7295b99-...` (the REJECTED
+      v1.0.1), not the READY_FOR_SALE ones.
+  - **`asc_push_janggi_screenshots.py` bugs found and fixed:**
+    - `SHOTS_DIR` hardcoded to `/Users/user/Janggi/screenshots/v2` (same
+      stale MacBook Air path) — now resolves via `Path.home() / "Projects" /
+      "Janggi" / ...`.
+    - `find_version_loc_id` had the identical hardcoded-`"1.0"` version-
+      selection bug as the metadata script — fixed the same way.
+    - `upload_iap_review_screenshot` had no error handling — a locked/
+      in-review IAP (409) would crash the whole script even after the 5
+      version screenshots already uploaded successfully. Added a
+      try/except; confirmed it fires for real (the IAP review screenshot
+      genuinely 409'd this run — `janggi.pro` is still tied to the prior
+      REJECTED submission — and the script now reports it cleanly instead
+      of crashing).
+  - **ASO refresh (copy was already strong — per `docs/asc-metadata.md`,
+    only keywords touched):** en-US keywords swapped `tabletop`/`puzzle`
+    (generic/genre-mismatched) for `changgi` (alternate English spelling)
+    and `checkmate` (99/100 chars, was 96/100). ko keywords added
+    `체스`/`정통장기` (chess / authentic-janggi) — plenty of headroom (52/100,
+    was 44/100). Description/subtitle/promo left untouched — already
+    genuinely compelling, not template filler.
+  - **Pushed live to ASC** (metadata + screenshots only, no build/
+    review-submission): `asc_push_janggi.py` and
+    `asc_push_janggi_screenshots.py`, both re-run after the bug fixes above
+    and verified via `asc_inspect_listing.py` — keywords confirmed updated
+    on the REJECTED v1.0.1 (not the live v1.0), all 5 version screenshots
+    confirmed uploaded.
+  - **Version bump:** `MARKETING_VERSION` 1.0.2 → **1.0.3**,
+    `CURRENT_PROJECT_VERSION` 5 → **6** (`project.yml`, single settings
+    block — no separate target-level override to miss). Rebuilt clean on
+    Simulator after the bump: **BUILD SUCCEEDED, zero warnings.**
+  - **Build:** clean `xcodegen generate` + Simulator build both before and
+    after this session's changes, zero warnings both times.
+  - **Not touched this session:** rules engine correctness beyond the
+    horse-check spot-check (already re-verified 2026-08-09, no reason to
+    redo); onboarding content (already real, confirmed still gated on
+    `hasSeenOnboarding`); DEBUG/isPro double-gating (already confirmed
+    clean 2026-08-09, no changes touched that code path this session); IAP
+    wiring.
+  - **Still open / needs Q's judgment:** none blocking. The IAP review
+    screenshot (`iap-review-paywall.png`, separate from the 5-shot pipeline)
+    is still the old dark-mode "Unable to load purchase option" capture
+    from initial submission — pre-existing known cosmetic limitation
+    (StoreKit sandbox can't preview live pricing in an unattended capture),
+    documented since 2026-07-18, not touched this session.
 - **2026-08-09 — pre-resubmission quality review (part of the 19-app Guideline
   5.6 account-hold remediation pass; resubmission blocked until 2026-08-18).
   Local-only: nothing touched in App Store Connect.** 🟡 **READY FOR
