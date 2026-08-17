@@ -31,6 +31,18 @@ Official piece values (material scoring, ×100 scaled for AI eval, single source
 
 ## Current State
 
+**2026-08-18 — v1.0.4 (build 7) archived, exported, and uploaded to App Store
+Connect (Delivery UUID `c3615186-1085-4eaf-922e-420f34b0683e`), processed to
+`VALID`. This is the trial-paywall build described just below. Bumped past
+both the local 1.0.3(6) and the existing ASC version 1.0.1 (REJECTED,
+`f7295b99-...`) so the number can't collide with any version already known to
+ASC. **NOT YET submitted for review, and the build is not attached to any
+appStoreVersion** — deliberately held per the portfolio-wide staggered
+resubmission plan (this app's own slot is 2026-09-03, see the "Build staged
+for resubmission" entry below) and the explicit instruction to wait for the
+user's go-ahead app by app so Apple doesn't see a batch of near-simultaneous
+submissions.**
+
 **2026-08-18 — 7-day trial, then everything locks (no permanent free tier).** Part of the
 portfolio-wide standing rule that no app should offer free play at any difficulty/mode
 forever, only a capped trial (the ChineseChess/SamLoc pattern, applied here next).
