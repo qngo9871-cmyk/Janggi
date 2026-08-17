@@ -6,6 +6,9 @@
 "home.upgrade_feature.difficulty" = "%@ difficulty";
 "home.upgrade_feature.play_vs_friend" = "Play vs Friend";
 "home.upgrade_feature.paywall_capture" = "Medium & Expert difficulty, and Play vs Friend";
+"home.upgrade" = "Unlock the full version →";
+"home.upgrade.trialended" = "Trial ended — unlock to keep playing →";
+"home.trialdays" = "Free trial — %d day(s) left";
 
 /* AI difficulty */
 "difficulty.beginner" = "Beginner";
@@ -24,6 +27,7 @@
 "upgrade.try_again" = "Try Again";
 "upgrade.loading" = "Loading...";
 "upgrade.restore" = "Restore Purchase";
+"upgrade.subtitle.trialended" = "Your 7-day free trial has ended. Unlock the full version of Janggi to keep playing.";
 
 /* Purchase errors (PurchaseManager) */
 "purchase.error.not_available" = "Product not available. Please try again.";

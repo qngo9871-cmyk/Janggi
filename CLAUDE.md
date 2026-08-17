@@ -31,6 +31,33 @@ Official piece values (material scoring, ×100 scaled for AI eval, single source
 
 ## Current State
 
+**2026-08-18 — 7-day trial, then everything locks (no permanent free tier).** Part of the
+portfolio-wide standing rule that no app should offer free play at any difficulty/mode
+forever, only a capped trial (the ChineseChess/SamLoc pattern, applied here next).
+Previously **Beginner AI difficulty was permanently free** — `AIDifficulty.requiresPro`
+returned `false` for `.beginner` and `true` for `.medium`/`.expert`, with "Play vs Friend"
+always Pro-gated. `PurchaseManager.swift` gained `trialActive`/`trialDaysRemaining` backed
+by a `firstLaunchDate` UserDefaults key (7-day `trialDuration`), plus
+`evaluateTrialStatus()` called from `init()` alongside the existing transaction listener —
+existing installs with no stored `firstLaunchDate` get the clock started by this update
+rather than being locked out immediately. `HomeView` replaced its two inline
+`level.requiresPro && !purchaseManager.isPro` checks with a single `isLocked(_:)`: Medium/
+Expert stay permanently Pro-only (unaffected by the trial, matching what was already
+gated), but **Beginner now locks too once the 7-day trial ends** — so no difficulty stays
+free forever. Added a trial-days caption (`home.trialdays`, e.g. "Free trial — 5 day(s)
+left") shown while the trial is active and not Pro, plus a Home footnote button and
+`UpgradeView` subtitle that both switch to "trial ended" copy (`home.upgrade.trialended`,
+`upgrade.subtitle.trialended`) once expired. New keys added to both `en.lproj` and
+`ko.lproj` `Localizable.strings` (hand-translated Korean, matching the existing formal
+register). `PurchaseManager.updateEntitlementStatus()`'s `#if DEBUG` block was already
+double-gated (`isPro = ProcessInfo...environment["JG_CAPTURE"] != "paywall"`, not a bare
+`isPro = true`), so left untouched per the standing DEBUG-gating rule — no bug present
+here. Build-verified: `xcodebuild -destination 'generic/platform=iOS' -configuration
+Debug build` → **BUILD SUCCEEDED**. **Not yet archived/submitted — this is a real
+product change for existing live users (and this app is separately mid-way through the
+staggered Guideline 5.6 resubmission below), holding for explicit go-ahead before any
+archive/export/upload/submit step.**
+
 ## Build staged for resubmission (2026-08-13)
 
 Archived, exported, and uploaded a Release build ahead of the staggered resubmission — still

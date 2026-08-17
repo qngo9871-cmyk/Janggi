@@ -17,7 +17,9 @@ struct UpgradeView: View {
             Text(L("upgrade.title"))
                 .font(.title2.bold())
 
-            Text(L("upgrade.feature_available", feature))
+            Text(purchaseManager.isPro || purchaseManager.trialActive
+                 ? L("upgrade.feature_available", feature)
+                 : L("upgrade.subtitle.trialended"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

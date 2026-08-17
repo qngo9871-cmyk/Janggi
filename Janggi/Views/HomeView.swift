@@ -11,6 +11,16 @@ struct HomeView: View {
     @State private var upgradeFeature = ""
     @State private var showHowToPlay = false
 
+    /// True when `difficulty` should show a lock and route to the paywall.
+    /// Medium/Expert were already Pro-only and stay that way regardless of
+    /// the trial. Beginner was the permanently-free tier — it now locks too
+    /// once the 7-day trial ends, so no difficulty stays free forever.
+    private func isLocked(_ difficulty: AIDifficulty) -> Bool {
+        if purchaseManager.isPro { return false }
+        if difficulty.requiresPro { return true }
+        return !purchaseManager.trialActive
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 28) {
@@ -31,7 +41,7 @@ struct HomeView: View {
                         ForEach(AIDifficulty.allCases) { level in
                             HStack {
                                 Text(level.displayName)
-                                if level.requiresPro && !purchaseManager.isPro {
+                                if isLocked(level) {
                                     Image(systemName: "lock.fill")
                                 }
                             }
@@ -41,14 +51,20 @@ struct HomeView: View {
                     .pickerStyle(.segmented)
                     .frame(maxWidth: 280)
                     .onChange(of: selectedDifficulty) { _, newValue in
-                        if newValue.requiresPro && !purchaseManager.isPro {
+                        if isLocked(newValue) {
                             upgradeFeature = L("home.upgrade_feature.difficulty", newValue.displayName)
                             showUpgrade = true
                         }
                     }
 
+                    if !purchaseManager.isPro && purchaseManager.trialActive {
+                        Text(String(format: L("home.trialdays"), purchaseManager.trialDaysRemaining))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
                     Button {
-                        if selectedDifficulty.requiresPro && !purchaseManager.isPro {
+                        if isLocked(selectedDifficulty) {
                             upgradeFeature = L("home.upgrade_feature.difficulty", selectedDifficulty.displayName)
                             showUpgrade = true
                         } else {
@@ -88,6 +104,17 @@ struct HomeView: View {
                     Text(L("home.how_to_play"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                }
+
+                if !purchaseManager.isPro {
+                    Button {
+                        upgradeFeature = L("home.upgrade_feature.paywall_capture")
+                        showUpgrade = true
+                    } label: {
+                        Text(L(purchaseManager.trialActive ? "home.upgrade" : "home.upgrade.trialended"))
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 Spacer()
