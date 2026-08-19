@@ -31,13 +31,27 @@ Official piece values (material scoring, ×100 scaled for AI eval, single source
 
 ## Current State
 
+**2026-08-20 — v1.0.4 SUBMITTED, WAITING_FOR_REVIEW** (superseding the earlier
+2026-09-03 staggered-slot plan below — the user gave explicit go-ahead
+2026-08-20 to ship the apps that were already live with the free-forever bug,
+Janggi included). The stuck `1.0.1` submission (`f7295b99-...`, `REJECTED`
+version item + an IAP item, state `UNRESOLVED_ISSUES`) was canceled via the
+API to free the version; bumped in place to **1.0.4**, build 7 (Delivery UUID
+`c3615186-1085-4eaf-922e-420f34b0683e`, `VALID`) attached, `whatsNew` set for
+both en-US/ko. Canceling reset the IAP to `READY_TO_SUBMIT`, so the user
+manually re-ticked it into the version via the ASC web UI, which created its
+own new draft reviewSubmission (`52ec7922-...`) — attached the version to
+that same draft rather than creating a competing one, then submitted.
+Verified post-submit that both the version and the IAP moved to
+`WAITING_FOR_REVIEW` together.
+
 **2026-08-18 — v1.0.4 (build 7) archived, exported, and uploaded to App Store
 Connect (Delivery UUID `c3615186-1085-4eaf-922e-420f34b0683e`), processed to
 `VALID`. This is the trial-paywall build described just below. Bumped past
 both the local 1.0.3(6) and the existing ASC version 1.0.1 (REJECTED,
 `f7295b99-...`) so the number can't collide with any version already known to
-ASC. **NOT YET submitted for review, and the build is not attached to any
-appStoreVersion** — deliberately held per the portfolio-wide staggered
+ASC. NOT YET submitted for review, and the build is not attached to any
+appStoreVersion — deliberately held per the portfolio-wide staggered
 resubmission plan (this app's own slot is 2026-09-03, see the "Build staged
 for resubmission" entry below) and the explicit instruction to wait for the
 user's go-ahead app by app so Apple doesn't see a batch of near-simultaneous
