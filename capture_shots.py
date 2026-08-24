@@ -110,12 +110,18 @@ def main():
     print(f"==> device {name}")
     APP = build_app()
     subprocess.run(["xcrun", "simctl", "shutdown", DEVICE], capture_output=True)
+    subprocess.run(["xcrun", "simctl", "erase", DEVICE], capture_output=True)
     subprocess.run(["xcrun", "simctl", "boot", DEVICE], capture_output=True)
     sh("xcrun", "simctl", "bootstatus", DEVICE, "-b")
     subprocess.run(["xcrun", "simctl", "status_bar", DEVICE, "override", "--time", "9:41",
                     "--batteryLevel", "100", "--batteryState", "charged",
                     "--cellularBars", "4", "--wifiBars", "3"], capture_output=True)
     sh("xcrun", "simctl", "install", DEVICE, str(APP))
+    # A freshly-erased simulator can surface a first-boot system notification
+    # banner ("Ready for Apple Intelligence") a few seconds in, which then
+    # auto-dismisses on its own — wait it out before capturing so it doesn't
+    # land in a screenshot (found via vision QA, 2026-08-24).
+    time.sleep(8)
     raw = OUT / "_raw.png"
     for shotname, cap, headline in SHOTS:
         subprocess.run(["xcrun", "simctl", "terminate", DEVICE, BUNDLE], capture_output=True)

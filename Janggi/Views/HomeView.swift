@@ -49,7 +49,7 @@ struct HomeView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .frame(maxWidth: 280)
+                    .frame(maxWidth: 340)
                     .onChange(of: selectedDifficulty) { _, newValue in
                         if isLocked(newValue) {
                             upgradeFeature = L("home.upgrade_feature.difficulty", newValue.displayName)

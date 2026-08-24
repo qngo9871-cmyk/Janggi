@@ -1,3 +1,20 @@
+## Status 2026-08-24 (later same day) — vision QA found a stale screenshot + a real UI bug, both fixed
+
+`01-home.png` was stale — last captured in the "second polish pass" (2026-07-18-era),
+predating BOTH the 7-day-trial-lock feature and the DEBUG isPro fix above. It showed
+neither the trial banner nor lock icons on Medium/Expert (which lock unconditionally
+here — `requiresPro` is `true` for both, same as ChineseChess/Makruk, not the
+single-Hard-lock pattern most sibling apps use). Recapturing at current code revealed
+the same picker-truncation bug found across the portfolio: `.frame(maxWidth: 280)`
+can't fit label text + lock icon on 2 segments at once. Fixed:
+- `Views/HomeView.swift`: picker widened to `maxWidth: 340`.
+- `capture_shots.py`: added `simctl erase` before boot (trial-day count wasn't
+  deterministic across runs) and an 8s settle wait after install (a freshly-erased
+  simulator can surface a first-boot "Ready for Apple Intelligence" system notification
+  that landed in the first capture attempt).
+- Recaptured all 5 screenshots; visually confirmed correct trial-locked state, full
+  untruncated labels, no stray system UI.
+
 ## Status 2026-08-24 — DEBUG isPro double-gating bug fixed, code-only, NOT YET submitted
 
 Found by the fixed portfolio-wide `~/asc-tools/compliance_gate.py`: `isPro = JG_CAPTURE !=
