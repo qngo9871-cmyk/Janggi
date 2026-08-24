@@ -1,3 +1,13 @@
+## Status 2026-08-24 — DEBUG isPro double-gating bug fixed, code-only, NOT YET submitted
+
+Found by the fixed portfolio-wide `~/asc-tools/compliance_gate.py`: `isPro = JG_CAPTURE !=
+"paywall"` defaulted to unlocked on a bare Debug run and on the "home" capture (both `!=
+"paywall"`), same bug already fixed elsewhere in the portfolio. Fixed to also exclude
+"home" explicitly. **Code fixed and committed only — deliberately not built/archived/
+uploaded/submitted yet**, staged for a future day per the staggered-submission pacing (see
+memory `project_20260824_debug_gating_submission_queue`). Next: bump version, archive,
+upload, `new_version.py`, submit.
+
 # Janggi (Korean Chess)
 
 Native iOS app for playing Janggi (Korean Chess). Play vs AI or two-player local mode on an authentic 9×10 board. Forked from the ChineseChess (Xiangqi) engine at `/Users/user/ChineseChess` — same proven single-player-vs-AI model that got real download traction there.
