@@ -155,7 +155,15 @@ class PurchaseManager: ObservableObject {
 
     func updateEntitlementStatus() async {
         #if DEBUG
-        isPro = ProcessInfo.processInfo.environment["JG_CAPTURE"] != "paywall"
+        // Double-gating bug fix (2026-08-24, portfolio-wide compliance-gate finding):
+        // `capture != "paywall"` evaluates true when capture is nil too, so a bare Debug
+        // run (and the "home" screenshot capture) still force-unlocked Pro — the same
+        // double-gating bug already fixed in SamLoc/Fanorona/Dara/Surakarta/ChineseChess/
+        // BauCua/Klotski, just inverted syntax that slipped past the compliance gate's
+        // naive "mentions ProcessInfo" heuristic. Only force-unlock for capture scenarios
+        // that are supposed to show unlocked gameplay.
+        let capture = ProcessInfo.processInfo.environment["JG_CAPTURE"]
+        isPro = capture != nil && capture != "home" && capture != "paywall"
         #else
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
